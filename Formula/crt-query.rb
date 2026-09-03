@@ -35,9 +35,13 @@ class CrtQuery < Formula
 
   def install
     bin.install "crt-query"
-    # `crt-query completions <shell>` takes the shell as a bare argument,
-    # which is this helper's default parameter form.
-    generate_completions_from_executable(bin/"crt-query", "completions")
+    # No completions here on purpose. Homebrew generates them by RUNNING the
+    # installed binary, and `crt-query completions` landed after v0.1.0 -- so
+    # calling it against this release aborts the whole install. Restore the
+    # line below once the pinned release is one that has the subcommand;
+    # `just homebrew-formula` in the crt-query repo emits it by default.
+    #
+    #   generate_completions_from_executable(bin/"crt-query", "completions")
   end
 
   test do
